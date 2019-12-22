@@ -1,0 +1,26 @@
+server:
+  port: 4000
+zuul:
+  routes:
+    auth:
+      path: /uaa/**
+      url: http://localhost:5000
+      serviceId: auth
+      stripPrefix: false
+      sensitiveHeaders:
+    account-sevice:
+      path: /accounts/**
+      url: http://localhost:6000
+      serviceId: account-service
+      stripPrefix: false
+      sensitiveHeaders:
+  ignored-services: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+spring:
+  application:
+    name: gateway
